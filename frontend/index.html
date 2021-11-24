@@ -8,8 +8,22 @@
 </head>
 <body>
   <h1>Simple Dapp</h1>
-  <p className="Value"></p>
-  <input type="text" className="input" placeholder="candidate name"/>
-  <button>Set </button>
+  <p class="Value"></p>
+  <input type="text" class="input" placeholder="candidate name" onchange="onChange(this)"/>
+  <button onclick="xyz()">Set </button>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.6.1/web3.min.js"></script>
+  <script>
+
+   function onChange(e){
+    document.querySelector(".Value").innerHTML  = e.value
+   }
+    
+
+    function xyz(){
+      const value =document.querySelector(".Value").innerHTML
+    }
+  </script>
 </body>
 </html>

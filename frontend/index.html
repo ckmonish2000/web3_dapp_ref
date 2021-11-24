@@ -67,20 +67,33 @@ let abi = [
 ]
 
 
-let contractAddress = "0x726285E3C8acc1B6edeB1044B25196B0d4713506"
+let contractAddress = "0x33B59075aBaD49AD02FE9d443B9e94365F200a9a"
 
-web3.eth.contract(abi).at(contractAddress);
+const contract = new web3.eth.Contract(abi,contractAddress)
+
+
+//  fucntions to use contract in the front end
+
+// set fucntion 
+const val =contract.methods.get_candidate().call();
+val.then(function(v){
+  document.querySelector(".Value").innerHTML = v
+})
+.catch(err=>{
+  console.log(err)
+})
 
 
 
-   function onChange(e){
-    document.querySelector(".Value").innerHTML  = e.value
-   }
-    
+function xyz(){
+  const value =document.querySelector(".Value").innerHTML
+}
 
-    function xyz(){
-      const value =document.querySelector(".Value").innerHTML
-    }
+
+// set function
+function onChange(e){
+ document.querySelector(".Value").innerHTML  = e.value
+}
   </script>
 </body>
 </html>

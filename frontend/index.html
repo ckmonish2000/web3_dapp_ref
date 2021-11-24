@@ -26,10 +26,15 @@
       // checking if the browser is havin a web client like fetch 
 
       if(typeof web3 !== 'undefined'){
+
+        // if there is already a provider then use that
         web3 = new Web3(web3.currentProvider);
       }else{
+
+        // else initialize the provider
         web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:7545"))
       }
+
 
 
       const value =document.querySelector(".Value").innerHTML

@@ -35,7 +35,49 @@
         web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:7545"))
       }
 
+      // specifiy the account we are gonna use
 
+      web3.eth.defaultAccount = web3.eth.accounts[0]
+
+      // specifying what does the contract have and where to find the 
+
+      // abi -> application binary interface specifies what the contract has to offer
+      
+      // addresses is used to specify where the contract is on the blocakchain
+
+      let abi = [
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "value",
+				"type": "string"
+			}
+		],
+		"name": "set_candidate",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "get_candidate",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
+]
+     
+
+      let contractAddress = ""
+
+      web3.eth.contract(abi).at(contractAddress);
 
       const value =document.querySelector(".Value").innerHTML
     }

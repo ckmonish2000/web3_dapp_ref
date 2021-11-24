@@ -22,7 +22,16 @@
     
 
     function xyz(){
-      
+
+      // checking if the browser is havin a web client like fetch 
+
+      if(typeof web3 !== 'undefined'){
+        web3 = new Web3(web3.currentProvider);
+      }else{
+        web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:7545"))
+      }
+
+
       const value =document.querySelector(".Value").innerHTML
     }
   </script>

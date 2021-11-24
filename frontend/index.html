@@ -9,8 +9,8 @@
 <body>
   <h1>Simple Dapp</h1>
   <p class="Value"></p>
-  <input type="text" class="input" placeholder="candidate name" onchange="onChange(this)"/>
-  <button onclick="xyz()">Set </button>
+  <input type="text" class="input" placeholder="candidate name" />
+  <button onclick="xyz()">Set</button>
 
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.6.1/web3.min.js"></script>
@@ -28,8 +28,8 @@ web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:7545"))
 }
 
 // specifiy the account we are gonna use
-
-web3.eth.defaultAccount = web3.eth.accounts[0]
+const account =  web3.eth.accounts[0]
+web3.eth.defaultAccount = account
 
 // specifying what does the contract have and where to find the 
 
@@ -74,7 +74,9 @@ const contract = new web3.eth.Contract(abi,contractAddress)
 
 //  fucntions to use contract in the front end
 
-// set fucntion 
+// get fucntion 
+function get(){
+
 const val =contract.methods.get_candidate().call();
 val.then(function(v){
   document.querySelector(".Value").innerHTML = v
@@ -83,17 +85,30 @@ val.then(function(v){
   console.log(err)
 })
 
-
-
-function xyz(){
-  const value =document.querySelector(".Value").innerHTML
 }
 
+get()
 
 // set function
-function onChange(e){
- document.querySelector(".Value").innerHTML  = e.value
+function xyz(){
+  const parameter =  document.querySelector(".input").value
+  
+  // address of who is altering the state
+
+  const sender_address = web3.currentProvider.selectedAddress
+
+  const val =contract.methods.set_candidate(parameter).send({from:sender_address}, function (err, res) {
+    if (err) {
+      console.log("An error occured", err)
+      return
+    }
+    console.log("Hash of the transaction: " + res)
+    get()
+  });
 }
+
+
+
   </script>
 </body>
 </html>
